@@ -1,0 +1,105 @@
+* {
+    box-sizing: border-box;
+}
+
+p {
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    width: 500px;
+    border: 1px solid #eee;
+    border-radius: 3px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+form {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 5px 15px;
+    border: 0px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 3px;
+    outline: 0;
+    color: white;
+}
+
+button.danger {
+    background: #eb2f06;
+}
+
+button.primary {
+    background: #4a69bd;
+}
+
+button.success {
+    background: #2ed573;
+}
+
+input {
+    padding: 8px 15px;
+    outline: 0;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+form input {
+    flex: 1;
+    margin-right: 15px;
+}
+
+ul {
+    padding: 0;
+    list-style: none;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    padding: 10px 0px;
+    cursor: pointer;
+}
+
+li:hover {
+    background: lightblue;
+    border-radius: 5px;
+    padding: 10px 0px 10px 5px;
+}
+
+li input {
+    flex: 1;
+}
+
+li p {
+    flex: 1;
+}
+
+li p.done {
+    text-decoration: line-through;
+}
+
+li .todo {
+    flex: 0 0 20px;
+    height: 20px;
+    border-radius: 30px;
+    margin-right: 15px;
+    border: 2px solid #333;
+}
+
+li .todo.done {
+    background: #333;
+}

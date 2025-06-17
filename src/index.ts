@@ -1,10 +1,11 @@
-import './style.css';
+import { Todo } from './intefaces/todo.interace';
+import './style/style.css';
 
-const ul = document.querySelector('ul');
-const form = document.querySelector('form');
-const input = document.querySelector('form > input');
+const ul:HTMLUListElement = document.querySelector('ul')!;
+const form:HTMLFormElement = document.querySelector('form')!;
+const input:HTMLInputElement = document.querySelector<HTMLInputElement>('form > input')!;
 
-form.addEventListener('submit', (event) => {
+form.addEventListener('submit', (event:Event):void => {
   event.preventDefault();
   const value = input.value;
   input.value = '';
@@ -12,13 +13,13 @@ form.addEventListener('submit', (event) => {
 });
 
 document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape' && todos.find((t) => t.editMode)) {
+  if (event?.key === 'Escape' && todos.find((t) => t.editMode)) {
     todos.find((t) => t.editMode).editMode = false;
     displayTodo();
   }
 });
 
-const todos = [
+const todos:Todo[] = [
   {
     text: 'Faire du JavaScript',
     done: true,
@@ -27,7 +28,7 @@ const todos = [
 ];
 
 const displayTodo = () => {
-  const todosNode = todos.map((todo, index) => {
+  const todosNode:HTMLLIElement[] = todos.map((todo:Todo, index:number) => {
     if (todo.editMode) {
       return createTodoEditElement(todo, index);
     } else {
@@ -38,12 +39,12 @@ const displayTodo = () => {
   ul.append(...todosNode);
 };
 
-const createTodoElement = (todo, index) => {
+const createTodoElement = (todo:Todo, index:number) => {
   const li = document.createElement('li');
-  const buttonDelete = document.createElement('button');
+  const buttonDelete:HTMLButtonElement = document.createElement('button');
   buttonDelete.innerHTML = 'Supprimer';
   buttonDelete.classList.add('danger');
-  const buttonEdit = document.createElement('button');
+  const buttonEdit:HTMLButtonElement = document.createElement('button');
   buttonEdit.innerHTML = 'Edit';
   buttonEdit.classList.add('primary');
   buttonDelete.addEventListener('click', (event) => {
@@ -73,9 +74,9 @@ const createTodoElement = (todo, index) => {
   return li;
 };
 
-const createTodoEditElement = (todo, index) => {
-  const li = document.createElement('li');
-  const input = document.createElement('input');
+const createTodoEditElement = (todo:Todo, index:number) => {
+  const li:HTMLLIElement = document.createElement('li');
+  const input:HTMLInputElement = document.createElement('input');
   input.type = 'text';
   input.value = todo.text;
   input.addEventListener('keydown', (event) => {
@@ -83,17 +84,17 @@ const createTodoEditElement = (todo, index) => {
       editTodo(index, input);
     }
   });
-  const buttonSave = document.createElement('button');
+  const buttonSave:HTMLButtonElement = document.createElement('button');
   buttonSave.innerHTML = 'Save';
   buttonSave.classList.add('success');
-  const buttonCancel = document.createElement('button');
+  const buttonCancel:HTMLButtonElement = document.createElement('button');
   buttonCancel.innerHTML = 'Cancel';
   buttonCancel.classList.add('danger');
   buttonCancel.addEventListener('click', (event) => {
     event.stopPropagation();
     toggleEditMode(index);
   });
-  buttonSave.addEventListener('click', (event) => {
+  buttonSave.addEventListener('click', () => {
     editTodo(index, input);
   });
   li.append(input, buttonSave, buttonCancel);
@@ -101,33 +102,34 @@ const createTodoEditElement = (todo, index) => {
   return li;
 };
 
-const addTodo = (text) => {
+const addTodo = (text:string) => {
   text = text.trim();
   if (text) {
     todos.push({
       text: `${text[0].toUpperCase()}${text.slice(1)}`,
       done: false,
+      editMode: false
     });
     displayTodo();
   }
 };
 
-const deleteTodo = (index) => {
+const deleteTodo = (index:number) => {
   todos.splice(index, 1);
   displayTodo();
 };
 
-const toggleTodo = (index) => {
+const toggleTodo = (index:number) => {
   todos[index].done = !todos[index].done;
   displayTodo();
 };
 
-const toggleEditMode = (index) => {
+const toggleEditMode = (index:number) => {
   todos[index].editMode = !todos[index].editMode;
   displayTodo();
 };
 
-const editTodo = (index, input) => {
+const editTodo = (index:number, input:HTMLInputElement) => {
   const value = input.value;
   todos[index].text = value;
   todos[index].editMode = false;
